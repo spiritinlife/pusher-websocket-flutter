@@ -412,6 +412,7 @@ class EventChannelListener implements ChannelEventListener {
 
     @Override
     public void onEvent(final PusherEvent pusherEvent) {
+        Log.d(PusherPlugin.TAG, "EventChannelListener:onEvent ");
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
@@ -506,6 +507,7 @@ class PrivateChannelChannelListener extends EventChannelListener implements Priv
 
     @Override
     public void onSubscriptionSucceeded(String channelName) {
+        Log.d(PusherPlugin.TAG, "private channel subscription succeeded: " + channelName);
         this.onEvent(toPusherEvent(channelName, SUBSCRIPTION_SUCCESS_EVENT, null, null));
     }
 
