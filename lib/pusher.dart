@@ -89,6 +89,7 @@ class Pusher {
   }
 
   static void _handleEvent([dynamic arguments]) {
+    print(arguments);
     if (arguments == null || !(arguments is String)) {
       //TODO log
     }
