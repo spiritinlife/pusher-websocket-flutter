@@ -14,10 +14,9 @@ Pusher Flutter Client
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
-  s.swift_version = '4.2'
+  s.swift_version = '5.0'
   s.dependency 'Flutter'
-  s.dependency 'PusherSwift', '7.0.0'
+  s.dependency 'PusherSwift', '7.2.0'
 
   s.ios.deployment_target = '9.0'
 end
-
