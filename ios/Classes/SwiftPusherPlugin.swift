@@ -159,19 +159,18 @@ public class SwiftPusherPlugin: NSObject, FlutterPlugin, PusherDelegate {
                 SwiftPusherPlugin.bindedEvents[bindArgs.channelName + bindArgs.eventName] = channelObj.bind(eventName: bindArgs.eventName, eventCallback: { (event: PusherEvent) -> Void in
                     do {
                         if let data: String = event.data {
-                            // let pushJsonData = try! JSONSerialization.data(withJSONObject: data)
-                            // let pushJsonString = NSString(data: pushJsonData, encoding: String.Encoding.utf8.rawValue)
-                            // let event = Event(channel: bindArgs.channelName, event: bindArgs.eventName, data: pushJsonString! as String)
-                            // let message = PusherEventStreamMessage(event: event, connectionStateChange:  nil)
-                            // let jsonEncoder = JSONEncoder()
-                            // let jsonData = try jsonEncoder.encode(message)
-                            // let jsonString = String(data: jsonData, encoding: .utf8)
-                            if let eventSinkObj = SwiftPusherPlugin.eventSink {
-                                eventSinkObj(data)
 
-                                // if (SwiftPusherPlugin.isLoggingEnabled) {
-                                //     print("Pusher event: CHANNEL:\(bindArgs.channelName) EVENT:\(bindArgs.eventName) DATA:\(jsonString ?? "no data")")
-                                // }
+                            let event = Event(channel: bindArgs.channelName, event: bindArgs.eventName, data: data)
+                            let message = PusherEventStreamMessage(event: event, connectionStateChange:  nil)
+                            let jsonEncoder = JSONEncoder()
+                            let jsonData = try jsonEncoder.encode(message)
+                            let jsonString = String(data: jsonData, encoding: .utf8)
+                            if let eventSinkObj = SwiftPusherPlugin.eventSink {
+                                eventSinkObj(jsonString)
+
+                                if (SwiftPusherPlugin.isLoggingEnabled) {
+                                    print("Pusher event: CHANNEL:\(bindArgs.channelName) EVENT:\(bindArgs.eventName) DATA:\(jsonString ?? "no data")")
+                                }
                             }
                         }
                     } catch {
