@@ -154,7 +154,7 @@ public class PusherPlugin implements MethodCallHandler {
             } else {
                 pusherOptions.setWsPort(port);
             }
-            pusherOptions.setEncrypted(encrypted);
+            pusherOptions.setUseTLS(encrypted);
 
 
             // create client

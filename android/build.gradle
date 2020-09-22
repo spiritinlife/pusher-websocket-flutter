@@ -32,6 +32,6 @@ android {
         disable 'InvalidPackage'
     }
     dependencies {
-        implementation 'com.pusher:pusher-java-client:2.0.2'
+        implementation 'com.pusher:pusher-java-client:2.2.5'
     }
 }
