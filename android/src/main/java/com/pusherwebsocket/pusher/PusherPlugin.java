@@ -36,6 +36,7 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
+import java.util.Iterator;
 
 /**
  * PusherPlugin
@@ -108,10 +109,11 @@ public class PusherPlugin implements MethodCallHandler {
 
     private void init(MethodCall call, Result result) {
         if (pusher != null) {
-            for (Map.Entry<String, Channel> entry : channels.entrySet()) {
-                String name = entry.getKey();
-                pusher.unsubscribe(name);
-                channels.remove(name);
+            Iterator<Map.Entry<String, Channel>> iter = channels.entrySet().iterator();
+            while (iter.hasNext()) {
+                Map.Entry<String, Channel> entry = iter.next();
+                pusher.unsubscribe(entry.getKey());
+                iter.remove();
             }
         }
 
